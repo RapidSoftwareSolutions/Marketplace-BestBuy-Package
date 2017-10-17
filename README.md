@@ -34,7 +34,7 @@ The Products API gives you access to the full Best Buy catalog.
 | sort          | String     | You can specify the way in which you’d like to have the results sorted by one or more attribute value(s).`attribute.asc` - Sort the results in ascending order of the specified attribute. `attribute.dsc` - Sort the results in descending order of the specified attribute. `attribute.desc` - Sort the results in descending order of the specified attribute.
 | cursorMask    | String     | With large result sets - e.g., query sets with more than 10 pages of results - we recommend you use the cursorMark parameter to walk through your results. You can use cursorMark to walk through the full product or store catalog, deltas since you last queried for active products, or any other query result. The cursorMark works a lot like a bookmark, keeping track of what subset of items are currently shown in your result set and how to get to the next subset of items.To use the cursorMark with your result set, add cursorMark=* to your query parameters.
 
-###Search Techniques
+### Search Techniques
 
 Search consists of one or more terms that generally include an attribute, operator and value. Terms are combined with ampersands & or pipes `|`. Searches are implemented as part of an HTTP GET request to the deisred Best Buy API. `term1&term` - specifies term1 AND term2 `term1|term2` - specifies term1 OR term2.
 
@@ -49,20 +49,20 @@ Available Operators
 6. `<=` - attribute less than or equal to a specified value
 7. `in` - search based on a list of attribute values
 
-####Search by a single attribute
+#### Search by a single attribute
 
 Our Products, Stores and Categories APIs can be searched by nearly all available attributes. For example, to find only the stores located in Utah, you can use the query shown to the right.
 For example: `region=ut`
 
-####Search by all attributes (AND)
+#### Search by all attributes (AND)
 If you need to search for the values of more than one attribute and all of the attributes must be present, combine them with an ampersand `&`.
 For example: `manufacturer=canon&salePrice<1000`
 
-####Search by any attributes (OR)
+#### Search by any attributes (OR)
 If you want items with any of the specified attributes, combine them with a pipe `|`.
 For example: `wifiReady=true|wifiBuiltIn=true`
 
-####Complex Searches
+#### Complex Searches
 Complex searches can be performed by combining AND `&` and OR `|` operations with parantheses. For example: let’s say that you’re looking for a Play Station Portable video game (platform=psp). You don’t want to spend more than $15 (salePrice<=15). However, because you will trade in the game when you’re done, you could spend up to $20 (salePrice<=20). You also want to make sure the game is available to buy online and pickup at a store (inStorePickup=true).
 
 The search terms for this example can be combined as:
@@ -71,22 +71,22 @@ The search terms for this example can be combined as:
 
 For example: `platform=psp&(salePrice<=15|(salePrice<=20&inStorePickup=true))`
 
-####Search by date range
+#### Search by date range
 If you want to find all products that were released February 2014, use this query:
 `releaseDate>=2014-02-01&releaseDate<=2014-02-28`
 
-####Search by date relative to today
+#### Search by date relative to today
 You can also use the value `today` to represent the current day. If you want to see all the products that were released today, use this query.
 For example: `releaseDate>today`
 
-####Search for multiple attribute values
+#### Search for multiple attribute values
 If you want multiple values of a single attribute, you can specify them individually. For example, if you want to see white, bisque, or stainless-steel side-by-side refrigerators, use this query.
 
 NOTE: To search for products based on a list of attribute values, we recommend using the `in` operator. Most attributes can be used with the `in` operator. The most common attribute used is SKU. Using the in operator helps to avoid Query Per Second errors (QPS).
 
 For example: `sku in(43900,2088495,7150065)`
 
-####Wildcards - Value is present
+#### Wildcards - Value is present
 You can use the asterisk `*` as a wildcard character. The wildcard can be used to:
 
 1. indicate the presence of attribute values
@@ -100,12 +100,12 @@ Some attributes apply only to specific items. Even then, because much of this at
 
 For example: - `categoryPath.id=abcat0502000&driveCapacityGb=*`
 
-####Wildcards - Value is NOT present
+#### Wildcards - Value is NOT present
 This will return results in which there is no value present. In the following example, with the addition of the !, the return result has shifted from Solid State Drive.
 
 For example: - `categoryPath.id=abcat0502000&driveCapacityGb!=*`
 
-####Wildcards - String
+#### Wildcards - String
 When used as part of a string search, the wildcard performs two functions. First, it tokenizes the string, breaking it into words. Second, it operates as a standard wildcard, matching any set of characters in the tokenized string. The following example illustrates both functions. When searching for a string value, you may want to search for variations on a specific word.
 
 There are several description attributes by which you can search, including `longDescription`, `shortDescription`, `description` or `name`. There is a single SKU attribute to search based on SKU.
@@ -114,12 +114,12 @@ In this example we are searching the longDescription for iPhone*. We have append
 
 For example: - `longDescription=iPhone*|sku=7619002`
 
-####Wildcard - Limitations
+#### Wildcard - Limitations
 
 - You cannot use a wildcard to begin a string search (e.g. (name=*top)); this type of search is extremely resource intensive and doing so will result in a 400 error.
 - Wildcard with data is valid for strings only. When used alone, the wildcard can represent any data type. When used with other characters, the wildcard can only represent string data. For example, to find Canon products with customer reviews of 4.x, you cannot use (manufacturer=canon&customerReviewAverage=4.*) as the search string. You would have to use a search string like this: (manufacturer=canon&customerReviewAverage>4&customerReviewAverage<5).
 
-####Filtered product attribute 
+#### Filtered product attribute 
 ertain attributes, such as active=true, digital=false or preowned=false inherently filter results.
 
 If your search string is `sku=*`, you will only return active products, not all products. This is the same as specifying `sku=*&active=true`. If you want a list of all active and inactive products, you can specify sku=*&active=*.
@@ -128,7 +128,7 @@ Because active is a boolean attribute, `active=*` will return products for which
 
 If your search string goes to sku.xml or sku.json these filters are ignored.
 
-####Keyword Search Function
+#### Keyword Search Function
 
 Our Keyword Search function (search=searchterm) allows you to search text accross several common attributes. To search for a term that includes a space, include an & ampersand between the words or it will be treated as an `|` or. The Keyword Search includes the following attributes:
 
@@ -139,7 +139,7 @@ Our Keyword Search function (search=searchterm) allows you to search text accros
 5. features.feature
 6. details.value
 
-####Search on Reviews
+#### Search on Reviews
 
 To search for products based on customer review criteria, you can use the customerReviewAverage and/or the customerReviewCount attributes. You can also limit the product information returned using our show functionality. HINT: You can specify additional attributes in your search or to be included in the response document for most attributes in the Products API.
 
