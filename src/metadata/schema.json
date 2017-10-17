@@ -1,0 +1,937 @@
+{
+    "package": "BestBuy",
+    "tagline": "BestBuy API",
+    "description": "Best Buy is a leading provider of technology products, services and solutions. The company offers expert service at an unbeatable price more than 1.5 billion times a year to the consumers, small business owners and educators who visit our stores, engage with Geek Squad Agents or use BestBuy.com or the Best Buy app. The company has operations in the U.S. where more than 70 percent of the population lives within 15 minutes of a Best Buy store, as well as in Canada and Mexico, where Best Buy has a physical and online presence.",
+    "image": "https:\/\/logo.clearbit.com\/www.bestbuy.com",
+    "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-BestBuy-Package",
+    "keywords": [
+        "API",
+        "Products",
+        "Search",
+        "Filter",
+        "Buy"
+    ],
+    "accounts": {
+        "domain": "www.bestbuy.com",
+        "credentials": [
+            "apiKey"
+        ]
+    },
+    "steps": [
+        "Visit https:\/\/developer.bestbuy.com\/login and sign up with your email.",
+        "After,you get an email with instructions on how to activate your new api key."
+    ],
+    "blocks": [
+        {
+            "name": "getProductBySearchQuery",
+            "description": "The Products API gives you access to the full Best Buy catalog.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key that you received from BestBuy.",
+                    "required": true
+                },
+                {
+                    "name": "returnedFields",
+                    "type": "String",
+                    "info": "The show attribute allows you to control which attributes are returned.To return all attributes `all`.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "show"
+                    }
+                },
+                {
+                    "name": "searchQuery",
+                    "type": "String",
+                    "info": "Search consists of one or more terms that generally include an attribute, operator and value. Terms are combined with ampersands & or pipes |. Searches are implemented as part of an HTTP GET request to the deisred Best Buy API. term1&term2 - specifies term1 AND term2 term1|term2 - specifies term1 OR term2.Example - `customerReviewCount=5&dollarSavings=10.99&(categoryPath.id=pcmcat310200050004)`.More information in readme.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "searchQuery"
+                    }
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. Use the page parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Use the `page` parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                },
+                {
+                    "name": "facetsQuery",
+                    "type": "Number",
+                    "info": "You can retrieve summary information about the items that are returned by your query by using the facets query parameter.",
+                    "required": false
+                },
+                {
+                    "name": "facetsNumber",
+                    "type": "Number",
+                    "info": "Facets number.Required if use facetsQuery.",
+                    "required": false
+                },
+                {
+                    "name": "sort",
+                    "type": "String",
+                    "info": "You can specify the way in which you\u2019d like to have the results sorted by one or more attribute value(s).`attribute.asc` - Sort the results in ascending order of the specified attribute. `attribute.dsc` - Sort the results in descending order of the specified attribute. `attribute.desc` - Sort the results in descending order of the specified attribute.",
+                    "required": false
+                },
+                {
+                    "name": "cursorMask",
+                    "type": "String",
+                    "info": "With large result sets - e.g., query sets with more than 10 pages of results - we recommend you use the cursorMark parameter to walk through your results. You can use cursorMark to walk through the full product or store catalog, deltas since you last queried for active products, or any other query result. The cursorMark works a lot like a bookmark, keeping track of what subset of items are currently shown in your result set and how to get to the next subset of items.To use the cursorMark with your result set, add cursorMark=* to your query parameters.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.bestbuy.com\/v1\/products({$data['searchQuery']})",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "apiKey",
+                            "page",
+                            "pageSize",
+                            "cursorMask",
+                            "sort",
+                            "show"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "openBoxBySKU",
+            "description": "The Open Box Single SKU endpoint allows you to query by SKU all Open Box offers associated with a SKU. If there are no Open Box offers available, the query will return a HTTP 200 response code with an empty result set.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key that you received from BestBuy.",
+                    "required": true
+                },
+                {
+                    "name": "SKU",
+                    "type": "Number",
+                    "info": "Search all open box offers for SKU. We can see there are at least two offers excellent and certified.",
+                    "required": true
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Use the `page` parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.bestbuy.com\/beta\/products\/{$data['SKU']}\/openBox",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "apiKey",
+                            "page",
+                            "pageSize"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "openBoxByListSKUs",
+            "description": "The Open Box by List of SKUs endpoint allows you to query all Open Box offers associated with a list of SKUs. The endpoint will return any available Open Box offers. If there is not an offer for a particular SKU in the list, that SKU will not be represented in the results.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key that you received from BestBuy.",
+                    "required": true
+                },
+                {
+                    "name": "SKUs",
+                    "type": "List",
+                    "structure": {
+                        "name": "SKU",
+                        "type": "String",
+                        "info": "single SKU."
+                    },
+                    "info": "The Open Box by List of SKUs endpoint allows you to query all Open Box offers associated with a list of SKUs. The endpoint will return any available Open Box offers. If there is not an offer for a particular SKU in the list, that SKU will not be represented in the results.",
+                    "required": true,
+                    "vendorSchema": {
+                        "format": "toString{,}"
+                    }
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Use the `page` parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.bestbuy.com\/beta\/products\/openBox(sku%20in({$data['SKUs']}))",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "apiKey",
+                            "page",
+                            "pageSize"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllOpenBox",
+            "description": "The endpoint will return any available Open Box offers.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key that you received from BestBuy.",
+                    "required": true
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Use the `page` parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.bestbuy.com\/beta\/products\/openBox",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "apiKey",
+                            "page",
+                            "pageSize"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "openBoxByCategory",
+            "description": "The Open Box by Category endpoint allows you to query all Open Box offers associated with the SKUs in the requested category. If there are no Open Box offers available, the query will return a HTTP 200 response code with an empty result set.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key that you received from BestBuy.",
+                    "required": true
+                },
+                {
+                    "name": "categoryId",
+                    "type": "String",
+                    "info": "Category Id.Example - abcat0400000.",
+                    "required": true
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Use the `page` parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.bestbuy.com\/beta\/products\/openBox(categoryId={$data['categoryId']})",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "apiKey",
+                            "page",
+                            "pageSize"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllCategories",
+            "description": "The query to the right will return all the Best Buy product categories. Query is filtered to show only ids.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key that you received from BestBuy.",
+                    "required": true
+                },
+                {
+                    "name": "returnedFields",
+                    "type": "String",
+                    "info": "The show attribute allows you to control which attributes are returned.To return all attributes `all`.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "show"
+                    }
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. Use the page parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Use the `page` parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                },
+                {
+                    "name": "facetsQuery",
+                    "type": "Number",
+                    "info": "You can retrieve summary information about the items that are returned by your query by using the facets query parameter.",
+                    "required": false
+                },
+                {
+                    "name": "facetsNumber",
+                    "type": "Number",
+                    "info": "Facets number.Required if use facetsQuery.",
+                    "required": false
+                },
+                {
+                    "name": "sort",
+                    "type": "String",
+                    "info": "You can specify the way in which you\u2019d like to have the results sorted by one or more attribute value(s).`attribute.asc` - Sort the results in ascending order of the specified attribute. `attribute.dsc` - Sort the results in descending order of the specified attribute. `attribute.desc` - Sort the results in descending order of the specified attribute.",
+                    "required": false
+                },
+                {
+                    "name": "cursorMask",
+                    "type": "String",
+                    "info": "With large result sets - e.g., query sets with more than 10 pages of results - we recommend you use the cursorMark parameter to walk through your results. You can use cursorMark to walk through the full product or store catalog, deltas since you last queried for active products, or any other query result. The cursorMark works a lot like a bookmark, keeping track of what subset of items are currently shown in your result set and how to get to the next subset of items.To use the cursorMark with your result set, add cursorMark=* to your query parameters.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.bestbuy.com\/v1\/categories",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "show",
+                            "apiKey",
+                            "page",
+                            "pageSize",
+                            "cursorMask",
+                            "sort"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getCategoriesByName",
+            "description": "The following query will return the category path for the category name specified in the input.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key that you received from BestBuy.",
+                    "required": true
+                },
+                {
+                    "name": "categoryName",
+                    "type": "String",
+                    "info": "Category name.",
+                    "required": true
+                },
+                {
+                    "name": "returnedFields",
+                    "type": "String",
+                    "info": "The show attribute allows you to control which attributes are returned.To return all attributes `all`.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "show"
+                    }
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. Use the page parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Use the `page` parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                },
+                {
+                    "name": "facetsQuery",
+                    "type": "Number",
+                    "info": "You can retrieve summary information about the items that are returned by your query by using the facets query parameter.",
+                    "required": false
+                },
+                {
+                    "name": "facetsNumber",
+                    "type": "Number",
+                    "info": "Facets number.Required if use facetsQuery.",
+                    "required": false
+                },
+                {
+                    "name": "sort",
+                    "type": "String",
+                    "info": "You can specify the way in which you\u2019d like to have the results sorted by one or more attribute value(s).`attribute.asc` - Sort the results in ascending order of the specified attribute. `attribute.dsc` - Sort the results in descending order of the specified attribute. `attribute.desc` - Sort the results in descending order of the specified attribute.",
+                    "required": false
+                },
+                {
+                    "name": "cursorMask",
+                    "type": "String",
+                    "info": "With large result sets - e.g., query sets with more than 10 pages of results - we recommend you use the cursorMark parameter to walk through your results. You can use cursorMark to walk through the full product or store catalog, deltas since you last queried for active products, or any other query result. The cursorMark works a lot like a bookmark, keeping track of what subset of items are currently shown in your result set and how to get to the next subset of items.To use the cursorMark with your result set, add cursorMark=* to your query parameters.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.bestbuy.com\/v1\/categories(name={$data['categoryName']}*)",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "show",
+                            "apiKey",
+                            "page",
+                            "pageSize",
+                            "cursorMask",
+                            "sort"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getCategoriesById",
+            "description": "The following query will return the category path for the category id specified in the input.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key that you received from BestBuy.",
+                    "required": true
+                },
+                {
+                    "name": "categoryId",
+                    "type": "String",
+                    "info": "Category id.",
+                    "required": true
+                },
+                {
+                    "name": "returnedFields",
+                    "type": "String",
+                    "info": "The show attribute allows you to control which attributes are returned.To return all attributes `all`.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "show"
+                    }
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. Use the page parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Use the `page` parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                },
+                {
+                    "name": "facetsQuery",
+                    "type": "Number",
+                    "info": "You can retrieve summary information about the items that are returned by your query by using the facets query parameter.",
+                    "required": false
+                },
+                {
+                    "name": "facetsNumber",
+                    "type": "Number",
+                    "info": "Facets number.Required if use facetsQuery.",
+                    "required": false
+                },
+                {
+                    "name": "sort",
+                    "type": "String",
+                    "info": "You can specify the way in which you\u2019d like to have the results sorted by one or more attribute value(s).`attribute.asc` - Sort the results in ascending order of the specified attribute. `attribute.dsc` - Sort the results in descending order of the specified attribute. `attribute.desc` - Sort the results in descending order of the specified attribute.",
+                    "required": false
+                },
+                {
+                    "name": "cursorMask",
+                    "type": "String",
+                    "info": "With large result sets - e.g., query sets with more than 10 pages of results - we recommend you use the cursorMark parameter to walk through your results. You can use cursorMark to walk through the full product or store catalog, deltas since you last queried for active products, or any other query result. The cursorMark works a lot like a bookmark, keeping track of what subset of items are currently shown in your result set and how to get to the next subset of items.To use the cursorMark with your result set, add cursorMark=* to your query parameters.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.bestbuy.com\/v1\/categories(id={$data['categoryId']})",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "show",
+                            "apiKey",
+                            "page",
+                            "pageSize",
+                            "cursorMask",
+                            "sort"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getTrendingProducts",
+            "description": "The Trending Products endpoint returns top ten products, by rank, based on customer views of the BESTBUY.COM product detail page over a rolling three hour time period. Trending growth is based on a comparison against the previous three hour time period.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key that you received from BestBuy.",
+                    "required": true
+                },
+                {
+                    "name": "categoryId",
+                    "type": "String",
+                    "info": "Category Id.Example - abcat0400000.",
+                    "required": true
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Use the `page` parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.bestbuy.com\/beta\/products\/trendingViewed(categoryId={$data['categoryId']})",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "apiKey",
+                            "page",
+                            "pageSize"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getTrendingProductsByCategoryId",
+            "description": "The Trending Products endpoint returns top ten products, by rank, based on customer views of the BESTBUY.COM product detail page over a rolling three hour time period. Trending growth is based on a comparison against the previous three hour time period.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key that you received from BestBuy.",
+                    "required": true
+                },
+                {
+                    "name": "categoryId",
+                    "type": "String",
+                    "info": "Category Id.Example - abcat0400000.",
+                    "required": true
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Use the `page` parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.bestbuy.com\/beta\/products\/trendingViewed(categoryId={$data['categoryId']})",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "apiKey",
+                            "page",
+                            "pageSize"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getPopularViewedProductsByCategoryId",
+            "description": "The Most Popular Viewed endpoint returns the top ten products, by rank, of the most frequently viewed products on BESTBUY.COM. You can also pull this same information by category or subcategory. To find out additional information about identifying category ids please refer to our Categories API documentation. This data for Most Popular Viewed is refreshed every two hours with a maximum accumulation time of 48 hours when determining the top ten products.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key that you received from BestBuy.",
+                    "required": true
+                },
+                {
+                    "name": "categoryId",
+                    "type": "String",
+                    "info": "Category Id.Example - abcat0400000.",
+                    "required": true
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Use the `page` parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.bestbuy.com\/beta\/products\/mostViewed(categoryId={$data['categoryId']})",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "apiKey",
+                            "page",
+                            "pageSize"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAlsoViewedProduct",
+            "description": "The Also Viewed Products endpoint can be used to identify top ten products that were viewed along with the originating product. These results are determined based on aggregated customer browsing behavior over the past thirty days on BESTBUY.COM.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key that you received from BestBuy.",
+                    "required": true
+                },
+                {
+                    "name": "productId",
+                    "type": "String",
+                    "info": "Product Id.Example - 5747275.",
+                    "required": true
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Use the `page` parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.bestbuy.com\/beta\/products\/{$data['productId']}\/alsoViewed",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "apiKey",
+                            "page",
+                            "pageSize"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getStoresBySearchQuery",
+            "description": "The Best Buy Stores API provides store information for all Best Buy stores in the United States and Puerto Rico. This information includes address, location, hours and services offered.In addition, store availability of a product can be determined by querying the Products API together with the Stores API. Refer to In Store Availability for more information on these type of queries.See more in readme.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key that you received from BestBuy.",
+                    "required": true
+                },
+                {
+                    "name": "searchQuery",
+                    "type": "String",
+                    "info": "Search consists of one or more terms that generally include an attribute, operator and value. Terms are combined with ampersands & or pipes |. Searches are implemented as part of an HTTP GET request to the deisred Best Buy API. term1&term2 - specifies term1 AND term2 term1|term2 - specifies term1 OR term2.Example - `(city=New-York)&((storeType=warehouse sale))&((services.service=\"car & gps installation services\"))`.More information in readme.",
+                    "required": true
+                },
+                {
+                    "name": "returnedFields",
+                    "type": "String",
+                    "info": "The show attribute allows you to control which attributes are returned.To return all attributes `all`.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "show"
+                    }
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. Use the page parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "type": "Number",
+                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
+                    "required": false
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Use the `page` parameter to choose which page of results you\u2019d like returned.",
+                    "required": false
+                },
+                {
+                    "name": "facetsQuery",
+                    "type": "Number",
+                    "info": "You can retrieve summary information about the items that are returned by your query by using the facets query parameter.",
+                    "required": false
+                },
+                {
+                    "name": "facetsNumber",
+                    "type": "Number",
+                    "info": "Facets number.Required if use facetsQuery.",
+                    "required": false
+                },
+                {
+                    "name": "sort",
+                    "type": "String",
+                    "info": "You can specify the way in which you\u2019d like to have the results sorted by one or more attribute value(s).`attribute.asc` - Sort the results in ascending order of the specified attribute. `attribute.dsc` - Sort the results in descending order of the specified attribute. `attribute.desc` - Sort the results in descending order of the specified attribute.",
+                    "required": false
+                },
+                {
+                    "name": "cursorMask",
+                    "type": "String",
+                    "info": "With large result sets - e.g., query sets with more than 10 pages of results - we recommend you use the cursorMark parameter to walk through your results. You can use cursorMark to walk through the full product or store catalog, deltas since you last queried for active products, or any other query result. The cursorMark works a lot like a bookmark, keeping track of what subset of items are currently shown in your result set and how to get to the next subset of items.To use the cursorMark with your result set, add cursorMark=* to your query parameters.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.bestbuy.com\/v1\/stores({$data['searchQuery']})",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "show",
+                            "apiKey",
+                            "page",
+                            "pageSize",
+                            "cursorMask",
+                            "sort"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        }
+    ]
+}
