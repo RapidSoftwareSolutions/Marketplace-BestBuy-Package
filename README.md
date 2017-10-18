@@ -25,7 +25,7 @@ The Products API gives you access to the full Best Buy catalog.
 |---------------|------------|----------
 | apiKey        | credentials| API key that you received from BestBuy.
 | returnedFields| String     | The show attribute allows you to control which attributes are returned.To return all attributes `all`.
-| searchQuery   | String     | Search consists of one or more terms that generally include an attribute, operator and value. Terms are combined with ampersands & or pipes `|`. Searches are implemented as part of an HTTP GET request to the deisred Best Buy API. term1&term2 - specifies term1 AND term2 `term1|term2` - specifies term1 OR term2.Example - `customerReviewCount=5&dollarSavings=10.99&(categoryPath.id=pcmcat310200050004)`.
+| searchQuery   | String     | Search consists of one or more terms that generally include an attribute, operator and value. Terms are combined with ampersands & or pipes. Searches are implemented as part of an HTTP GET request to the deisred Best Buy API. term1&term2 - specifies term1 AND term2 `term1|term2` - specifies term1 OR term2.Example - `customerReviewCount=5&dollarSavings=10.99&(categoryPath.id=pcmcat310200050004)`.
 | pageSize      | Number     | By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. Use the page parameter to choose which page of results you’d like returned.
 | pageSize      | Number     | By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. 
 | page          | Number     | Use the `page` parameter to choose which page of results you’d like returned.
