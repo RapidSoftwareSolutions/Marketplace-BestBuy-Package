@@ -152,7 +152,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.bestbuy.com\/beta\/products\/{$data['SKU']}\/openBox",
-                "method": "post",
+                "method": "get",
                 "requestParameters": [
                     {
                         "type": "query",
@@ -214,7 +214,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.bestbuy.com\/beta\/products\/openBox(sku%20in({$data['SKUs']}))",
-                "method": "post",
+                "method": "get",
                 "requestParameters": [
                     {
                         "type": "query",
@@ -262,7 +262,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.bestbuy.com\/beta\/products\/openBox",
-                "method": "post",
+                "method": "get",
                 "requestParameters": [
                     {
                         "type": "query",
@@ -316,7 +316,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.bestbuy.com\/beta\/products\/openBox(categoryId={$data['categoryId']})",
-                "method": "post",
+                "method": "get",
                 "requestParameters": [
                     {
                         "type": "query",
@@ -499,7 +499,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.bestbuy.com\/v1\/categories(name={$data['categoryName']}*)",
-                "method": "post",
+                "method": "get",
                 "requestParameters": [
                     {
                         "type": "query",
@@ -595,7 +595,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.bestbuy.com\/v1\/categories(id={$data['categoryId']})",
-                "method": "post",
+                "method": "get",
                 "requestParameters": [
                     {
                         "type": "query",
@@ -652,7 +652,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.bestbuy.com\/beta\/products\/trendingViewed(categoryId={$data['categoryId']})",
-                "method": "post",
+                "method": "get",
                 "requestParameters": [
                     {
                         "type": "query",
@@ -706,7 +706,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.bestbuy.com\/beta\/products\/trendingViewed(categoryId={$data['categoryId']})",
-                "method": "post",
+                "method": "get",
                 "requestParameters": [
                     {
                         "type": "query",
@@ -760,7 +760,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.bestbuy.com\/beta\/products\/mostViewed(categoryId={$data['categoryId']})",
-                "method": "post",
+                "method": "get",
                 "requestParameters": [
                     {
                         "type": "query",
@@ -794,9 +794,9 @@
                     "required": true
                 },
                 {
-                    "name": "productId",
+                    "name": "SKU",
                     "type": "String",
-                    "info": "Product Id.Example - 5747275.",
+                    "info": "Product SKU.Example - 6139532.",
                     "required": true
                 },
                 {
@@ -814,7 +814,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.bestbuy.com\/beta\/products\/{$data['productId']}\/alsoViewed",
-                "method": "post",
+                "method": "get",
                 "requestParameters": [
                     {
                         "type": "query",
@@ -907,7 +907,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.bestbuy.com\/v1\/stores({$data['searchQuery']})",
-                "method": "post",
+                "method": "get",
                 "requestParameters": [
                     {
                         "type": "query",

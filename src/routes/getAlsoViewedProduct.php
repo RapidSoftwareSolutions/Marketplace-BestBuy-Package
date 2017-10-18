@@ -4,7 +4,7 @@ $app->post('/api/BestBuy/getAlsoViewedProduct', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiKey','productId']);
+    $validateRes = $checkRequest->validate($request, ['apiKey','SKU']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,7 +12,7 @@ $app->post('/api/BestBuy/getAlsoViewedProduct', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','productId'=>'productId'];
+    $requiredParams = ['apiKey'=>'apiKey','SKU'=>'SKU'];
     $optionalParams = ['pageSize'=>'pageSize','page'=>'page'];
     $bodyParams = [
        'query' => ['apiKey','page','pageSize']
@@ -23,7 +23,7 @@ $app->post('/api/BestBuy/getAlsoViewedProduct', function ($request, $response) {
     
 
     $client = $this->httpClient;
-    $query_str = "https://api.bestbuy.com/beta/products/{$data['productId']}/alsoViewed";
+    $query_str = "https://api.bestbuy.com/beta/products/{$data['SKU']}/alsoViewed";
 
     
 
@@ -32,7 +32,7 @@ $app->post('/api/BestBuy/getAlsoViewedProduct', function ($request, $response) {
     $requestParams['query']['format'] = 'json';
 
     try {
-        $resp = $client->post($query_str, $requestParams);
+        $resp = $client->get($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
         if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {

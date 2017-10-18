@@ -25,14 +25,14 @@ $app->post('/api/BestBuy/openBoxBySKU', function ($request, $response) {
     $client = $this->httpClient;
     $query_str = "https://api.bestbuy.com/beta/products/{$data['SKU']}/openBox";
 
-    
+
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = [];
     $requestParams['query']['format'] = 'json';
 
     try {
-        $resp = $client->post($query_str, $requestParams);
+        $resp = $client->get($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 
         if(in_array($resp->getStatusCode(), ['200', '201', '202', '203', '204'])) {
