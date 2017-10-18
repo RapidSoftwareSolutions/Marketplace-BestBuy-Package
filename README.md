@@ -231,16 +231,6 @@ The following query will return the category path for the category id specified 
 | sort          | String     | You can specify the way in which you’d like to have the results sorted by one or more attribute value(s).`attribute.asc` - Sort the results in ascending order of the specified attribute. `attribute.dsc` - Sort the results in descending order of the specified attribute. `attribute.desc` - Sort the results in descending order of the specified attribute.
 | cursorMask    | String     | With large result sets - e.g., query sets with more than 10 pages of results - we recommend you use the cursorMark parameter to walk through your results. You can use cursorMark to walk through the full product or store catalog, deltas since you last queried for active products, or any other query result. The cursorMark works a lot like a bookmark, keeping track of what subset of items are currently shown in your result set and how to get to the next subset of items.To use the cursorMark with your result set, add cursorMark=* to your query parameters.
 
-## BestBuy.getTrendingProducts
-The Trending Products endpoint returns top ten products, by rank, based on customer views of the BESTBUY.COM product detail page over a rolling three hour time period. Trending growth is based on a comparison against the previous three hour time period.
-
-| Field     | Type       | Description
-|-----------|------------|----------
-| apiKey    | credentials| API key that you received from BestBuy.
-| categoryId| String     | Category Id.Example - abcat0400000.
-| pageSize  | Number     | By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. 
-| page      | Number     | Use the `page` parameter to choose which page of results you’d like returned.
-
 ## BestBuy.getTrendingProductsByCategoryId
 The Trending Products endpoint returns top ten products, by rank, based on customer views of the BESTBUY.COM product detail page over a rolling three hour time period. Trending growth is based on a comparison against the previous three hour time period.
 

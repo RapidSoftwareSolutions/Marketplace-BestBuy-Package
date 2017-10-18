@@ -598,60 +598,6 @@
             ]
         },
         {
-            "name": "getTrendingProducts",
-            "description": "The Trending Products endpoint returns top ten products, by rank, based on customer views of the BESTBUY.COM product detail page over a rolling three hour time period. Trending growth is based on a comparison against the previous three hour time period.",
-            "args": [
-                {
-                    "name": "apiKey",
-                    "type": "credentials",
-                    "info": "API key that you received from BestBuy.",
-                    "required": true
-                },
-                {
-                    "name": "categoryId",
-                    "type": "String",
-                    "info": "Category Id.Example - abcat0400000.",
-                    "required": true
-                },
-                {
-                    "name": "pageSize",
-                    "type": "Number",
-                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
-                    "required": false
-                },
-                {
-                    "name": "page",
-                    "type": "Number",
-                    "info": "Use the `page` parameter to choose which page of results you\u2019d like returned.",
-                    "required": false
-                }
-            ],
-            "vendorRequest": {
-                "url": "https:\/\/api.bestbuy.com\/beta\/products\/trendingViewed(categoryId={$data['categoryId']})",
-                "method": "get",
-                "requestParameters": [
-                    {
-                        "type": "query",
-                        "parameters": [
-                            "apiKey",
-                            "page",
-                            "pageSize"
-                        ]
-                    }
-                ]
-            },
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
-                {
-                    "name": "success",
-                    "info": "Success"
-                }
-            ]
-        },
-        {
             "name": "getTrendingProductsByCategoryId",
             "description": "The Trending Products endpoint returns top ten products, by rank, based on customer views of the BESTBUY.COM product detail page over a rolling three hour time period. Trending growth is based on a comparison against the previous three hour time period.",
             "args": [
