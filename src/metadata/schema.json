@@ -53,12 +53,6 @@
                 {
                     "name": "pageSize",
                     "type": "Number",
-                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. Use the page parameter to choose which page of results you\u2019d like returned.",
-                    "required": false
-                },
-                {
-                    "name": "pageSize",
-                    "type": "Number",
                     "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
                     "required": false
                 },
@@ -361,12 +355,6 @@
                 {
                     "name": "pageSize",
                     "type": "Number",
-                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. Use the page parameter to choose which page of results you\u2019d like returned.",
-                    "required": false
-                },
-                {
-                    "name": "pageSize",
-                    "type": "Number",
                     "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
                     "required": false
                 },
@@ -457,12 +445,6 @@
                 {
                     "name": "pageSize",
                     "type": "Number",
-                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. Use the page parameter to choose which page of results you\u2019d like returned.",
-                    "required": false
-                },
-                {
-                    "name": "pageSize",
-                    "type": "Number",
                     "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. ",
                     "required": false
                 },
@@ -549,12 +531,6 @@
                     "vendorSchema": {
                         "name": "show"
                     }
-                },
-                {
-                    "name": "pageSize",
-                    "type": "Number",
-                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. Use the page parameter to choose which page of results you\u2019d like returned.",
-                    "required": false
                 },
                 {
                     "name": "pageSize",
@@ -861,12 +837,6 @@
                     "vendorSchema": {
                         "name": "show"
                     }
-                },
-                {
-                    "name": "pageSize",
-                    "type": "Number",
-                    "info": "By default, we include 10 results per page, but you can ask for up to 100 per page by making use of the `pageSize` parameter. Use the page parameter to choose which page of results you\u2019d like returned.",
-                    "required": false
                 },
                 {
                     "name": "pageSize",

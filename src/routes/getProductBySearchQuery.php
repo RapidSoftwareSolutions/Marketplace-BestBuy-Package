@@ -13,7 +13,7 @@ $app->post('/api/BestBuy/getProductBySearchQuery', function ($request, $response
     }
 
     $requiredParams = ['apiKey'=>'apiKey','searchQuery'=>'searchQuery'];
-    $optionalParams = ['returnedFields'=>'show','pageSize'=>'pageSize','pageSize'=>'pageSize','page'=>'page','facetsQuery'=>'facetsQuery','facetsNumber'=>'facetsNumber','sort'=>'sort','cursorMask'=>'cursorMask'];
+    $optionalParams = ['returnedFields'=>'show','pageSize'=>'pageSize','page'=>'page','facetsQuery'=>'facetsQuery','facetsNumber'=>'facetsNumber','sort'=>'sort','cursorMask'=>'cursorMask'];
     $bodyParams = [
        'query' => ['apiKey','page','pageSize','cursorMask','sort','show']
     ];

@@ -13,7 +13,7 @@ $app->post('/api/BestBuy/getCategoriesById', function ($request, $response) {
     }
 
     $requiredParams = ['apiKey'=>'apiKey','categoryId'=>'categoryId'];
-    $optionalParams = ['returnedFields'=>'show','pageSize'=>'pageSize','pageSize'=>'pageSize','page'=>'page','facetsQuery'=>'facetsQuery','facetsNumber'=>'facetsNumber','sort'=>'sort','cursorMask'=>'cursorMask'];
+    $optionalParams = ['returnedFields'=>'show','pageSize'=>'pageSize','page'=>'page','facetsQuery'=>'facetsQuery','facetsNumber'=>'facetsNumber','sort'=>'sort','cursorMask'=>'cursorMask'];
     $bodyParams = [
        'query' => ['show','apiKey','page','pageSize','cursorMask','sort']
     ];
