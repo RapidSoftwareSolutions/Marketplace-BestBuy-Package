@@ -95,7 +95,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.bestbuy.com\/v1\/products({$data['searchQuery']})",
-                "method": "post",
+                "method": "get",
                 "requestParameters": [
                     {
                         "type": "query",
@@ -403,7 +403,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/api.bestbuy.com\/v1\/categories",
-                "method": "post",
+                "method": "get",
                 "requestParameters": [
                     {
                         "type": "query",
